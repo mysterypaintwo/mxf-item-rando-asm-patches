@@ -12,6 +12,7 @@
 
 org $8A80D2
     JSL NewGameSetup
+    BRA $00
 
 org !START_FREESPACE_03
 RandoStartTable:
@@ -36,6 +37,7 @@ NewGameSetup:
 {
   PHB
   PLB
+  PHK
   LDA #!RandoStartTable_energy
   STA $09C2
   STA $09C4
@@ -67,6 +69,6 @@ NewGameSetup:
   REP #$20
 
   JSL EventsEnableMap
-
+  PLB
   RTL
 }
