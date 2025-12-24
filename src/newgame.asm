@@ -12,8 +12,6 @@
 
 org $8A80D2
     JSL NewGameSetup
-  ; after this, optionally call:
-  JSL NewGameMapEnable
 
 org !START_FREESPACE_03
 RandoStartTable:
@@ -35,30 +33,40 @@ RandoStartTable:
     db $0000
 
 NewGameSetup:
-    PHB
-    PLB
-    LDA #!RandoStartTable_energy
-    STA $09C2
-    STA $09C4
-    LDA #!RandoStartTable_missiles
-    STA $09C6
-    STA $09C8
-    LDA #!RandoStartTable_powerBombs
-    STA $09CE
-    STA $09D0
-    LDA #!RandoStartTable_reserves
-    STA $09D4
-    STA $09EC
-    STA $09EE
-    LDA #!RandoStartTable_items
-    STA $09A2
-    STA $09A4
-    LDA #!RandoStartTable_beams
-    STA $09A6
-    STA $09A8
-    LDA #!RandoStartTable_area
-    STA $079F
-    LDA #!RandoStartTable_load
-    STA $078B
+{
+  PHB
+  PLB
+  LDA #!RandoStartTable_energy
+  STA $09C2
+  STA $09C4
+  LDA #!RandoStartTable_missiles
+  STA $09C6
+  STA $09C8
+  LDA #!RandoStartTable_powerBombs
+  STA $09CE
+  STA $09D0
+  LDA #!RandoStartTable_reserves
+  STA $09D4
+  STA $09EC
+  STA $09EE
+  LDA #!RandoStartTable_items
+  STA $09A2
+  STA $09A4
+  LDA #!RandoStartTable_beams
+  STA $09A6
+  STA $09A8
+  LDA #!RandoStartTable_area
+  STA $079F
+  LDA #!RandoStartTable_load
+  STA $078B
 
-    RTL
+  ; events and fixes
+  SEP #$20
+  LDA #$FF : STA $7ED909
+  LDA #$01 : STA $0DF4
+  REP #$20
+
+  JSL EventsEnableMap
+
+  RTL
+}
