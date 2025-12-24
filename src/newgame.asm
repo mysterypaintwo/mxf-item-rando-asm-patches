@@ -10,11 +10,7 @@
 !RandoStartTable_area = 1
 !RandoStartTable_load = 0
 
-org $8A80D2
-    JSL NewGameSetup
-    BRA $00
-
-org !START_FREESPACE_SLOT_03
+org !START_FREESPACE_SLOT_05
 RandoStartTable:
   .energy
     dw $0063
@@ -72,3 +68,20 @@ NewGameSetup:
   PLB
   RTL
 }
+
+; =======================================================
+; Enable map fully on new game
+; =======================================================
+
+EventsEnableMap:
+  %cm_toggle_bit_inverted("Map Obtained", $7E0DF4, $0001, .routine)
+.routine
+  %a8()
+  CMP #$01 : BNE .off
+  LDA #$FF
+  BRA .store
+.off
+  LDA #$00
+.store
+  STA $7ED909
+  RTL
