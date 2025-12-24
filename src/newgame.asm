@@ -14,7 +14,7 @@ org $8A80D2
     JSL NewGameSetup
     BRA $00
 
-org !START_FREESPACE_03
+org !START_FREESPACE_SLOT_03
 RandoStartTable:
   .energy
     dw $0063

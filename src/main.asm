@@ -4,4 +4,4 @@ incsrc freespace.asm
 incsrc newgame.asm
 incsrc enablepausing.asm
 
-%printfreespace()
+%printfreespace_all()

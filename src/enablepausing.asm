@@ -3,7 +3,7 @@
 ; =======================================================
 
 EventsEnableMap:
-  %cm_toggle_bit_inverted("Map Obtained", $7E0DF4, #$0001, #.routine)
+  %cm_toggle_bit_inverted("Map Obtained", $7E0DF4, $0001, .routine)
 .routine
   %a8()
   CMP #$01 : BNE .off
