@@ -18,3 +18,25 @@
 
 !START_FREESPACE_06 = $1BCD28 ; PC 0x0DCD28
 !END_FREESPACE_06   = $1BCD4F ; PC 0x0DCD4F
+
+macro printfreespacebank(bank)
+; Print some numbers about our freespace usage
+org !FREESPACE_<bank>
+!FREESPACE_COUNTER_<bank> ?= 0
+if !FREESPACE_COUNTER_<bank>
+print "Bank $<bank> ended at $", pc, " with $", hex(!FREESPACE_<bank>-!START_FREESPACE_<bank>), " bytes used, $", hex(!END_FREESPACE_<bank>-!FREESPACE_<bank>-1), " bytes remaining"
+endif
+endmacro
+
+macro printfreespace()
+; Hide this long list in a single macro
+; Use this macro at the end of assembly for debug text about freespace usage
+%printfreespacebank(80)
+%printfreespacebank(81)
+%printfreespacebank(83)
+%printfreespacebank(84)
+%printfreespacebank(8B)
+%printfreespacebank(90)
+%printfreespacebank(92)
+%printfreespacebank(9B)
+endmacro
