@@ -36,8 +36,8 @@ RandoStartTable:
 NewGameSetup:
 {
   PHB
-  PLB
   PHK
+  PLB
   LDA #!RandoStartTable_energy
   STA $09C2
   STA $09C4
