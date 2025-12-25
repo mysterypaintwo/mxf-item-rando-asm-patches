@@ -25,16 +25,11 @@ NewGameSetup:
   ; ---------------------------
   ; Load RandoStartTable pointer
   ; ---------------------------
-  REP #$20            ; 16-bit A
   LDA.l RandoStartTablePtr
   STA $00
-  LDA.l RandoStartTablePtr+1
-  STA $01
-  SEP #$20
   LDA.l RandoStartTablePtr+2
   STA $02
-
-  REP #$20            ; 16-bit A/Y
+  
   LDY #$0000
 
   ; energy
@@ -95,25 +90,6 @@ NewGameSetup:
   LDA #$01 : STA $0DF4
 
   REP #$20
-  JSL EventsEnableMap
 
   RTL
 }
-
-
-; =======================================================
-; Enable map fully on new game
-; =======================================================
-
-EventsEnableMap:
-  %cm_toggle_bit_inverted("Map Obtained", $7E0DF4, $0001, .routine)
-.routine
-  %a8()
-  CMP #$01 : BNE .off
-  LDA #$FF
-  BRA .store
-.off
-  LDA #$00
-.store
-  STA $7ED909
-  RTL
