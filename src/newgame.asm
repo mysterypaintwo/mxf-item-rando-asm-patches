@@ -22,10 +22,6 @@ RandoStartTable:
 ; =======================================================
 NewGameSetup:
 {
-  PHB
-  PHK
-  PLB
-
   ; ---------------------------
   ; Load RandoStartTable pointer
   ; ---------------------------
@@ -101,7 +97,6 @@ NewGameSetup:
   REP #$20
   JSL EventsEnableMap
 
-  PLB
   RTL
 }
 
