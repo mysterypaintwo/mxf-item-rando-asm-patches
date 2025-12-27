@@ -3,7 +3,9 @@
 ; =======================================================
 org $8A80D2
   JSL NewGameSetup
-  BRA $00
+  BRA NewGameSetup_returnBranch
+  NOP #9
+NewGameSetup_returnBranch:
 
 org !START_FREESPACE_SLOT_05
 RandoStartTable:
